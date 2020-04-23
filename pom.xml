@@ -6,7 +6,7 @@
 
     <groupId>com.theprogrammingturkey.mcu</groupId>
     <artifactId>mutiverse_chat_utils</artifactId>
-    <version>1.0.${build.number}</version>
+    <version>${project.version}</version>
 
     <repositories>
         <repository>
