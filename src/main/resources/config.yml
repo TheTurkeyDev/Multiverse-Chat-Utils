@@ -1,6 +1,6 @@
 multiverse:
   world:
-    censor-list: default
+    censor-list: example
   world2:
 
 chat-moderation:
@@ -10,6 +10,6 @@ chat-moderation:
       - reallybadword
 
 world-groups:
-  example:
+  exampleGroup:
     - world
     - world2

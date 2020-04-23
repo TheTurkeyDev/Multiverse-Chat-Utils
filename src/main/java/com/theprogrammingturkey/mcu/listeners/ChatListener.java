@@ -58,7 +58,7 @@ public class ChatListener implements Listener
 
 			String list = message.substring(2, message.indexOf(']'));
 			for(String woldName : list.split(","))
-				targetWorlds.add(Bukkit.getWorld(woldName));
+				targetWorlds.add(Bukkit.getWorld(woldName.trim()));
 
 			event.setMessage(message.substring(index + 1));
 		}
