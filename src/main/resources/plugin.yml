@@ -1,0 +1,17 @@
+main: com.theprogrammingturkey.mcu.MCUCore
+name: Multiverse-Chat-Utils
+description: Utility plugin for managing multiverse chat
+author: Turkey2349
+version: '1.0'
+api-version: '1.15'
+commands:
+  mvcu:
+    description: Your description
+    usage: /<command> <globalread | globalsend>
+permissions:
+  mvcu.global.send:
+    description: Allows users to be able to send and read messages globaly
+    default: op
+  mvcu.global.read:
+    description: Allows users to be able to read messages globaly
+    default: op

@@ -1,0 +1,15 @@
+multiverse:
+  world:
+    censor-list: default
+  world2:
+
+chat-moderation:
+  censor-list:
+    example:
+      - badword
+      - reallybadword
+
+world-groups:
+  example:
+    - world
+    - world2
