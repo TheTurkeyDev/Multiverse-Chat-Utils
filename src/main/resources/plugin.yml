@@ -2,7 +2,7 @@ main: com.theprogrammingturkey.mcu.MCUCore
 name: Multiverse-Chat-Utils
 description: Utility plugin for managing multiverse chat
 author: Turkey2349
-version: '${project.version}'
+version: ${project.version}
 api-version: '1.15'
 commands:
   mvcu:
