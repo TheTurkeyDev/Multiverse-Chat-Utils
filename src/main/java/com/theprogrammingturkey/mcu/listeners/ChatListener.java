@@ -86,6 +86,7 @@ public class ChatListener implements Listener
 		List<String> worldNames = targetWorlds.stream().filter(targetWorld -> targetWorld != null && !targetWorld.getName().endsWith("_nether") && !targetWorld.getName().endsWith("_the_end")).map(World::getName).collect(Collectors.toList());
 
 		sendDebugMessage("Potential worlds: " + Arrays.toString(worldNames.toArray(new String[0])));
+		sendDebugMessage("Configured World: " + Arrays.toString(config.getConfigurationSection("multiverse").getKeys(false).toArray(new String[0])));
 
 		for(String worldName : worldNames)
 		{
