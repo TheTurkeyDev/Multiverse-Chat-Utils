@@ -15,3 +15,6 @@ permissions:
   mvcu.global.read:
     description: Allows users to be able to read messages globaly
     default: op
+  mvcu.debug:
+    description: Allows users to be able to see debug messages
+    default: op
