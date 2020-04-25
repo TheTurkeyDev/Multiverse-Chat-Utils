@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -84,15 +85,23 @@ public class ChatListener implements Listener
 
 		List<String> worldNames = targetWorlds.stream().filter(targetWorld -> targetWorld != null && !targetWorld.getName().endsWith("_nether") && !targetWorld.getName().endsWith("_the_end")).map(World::getName).collect(Collectors.toList());
 
+		sendDebugMessage("Potential worlds: " + Arrays.toString(worldNames.toArray(new String[0])));
+
 		for(String worldName : worldNames)
 		{
 			ConfigurationSection worldConfig = config.getConfigurationSection("multiverse." + worldName);
 			if(worldConfig == null)
+			{
+				sendDebugMessage("World config null for: " + worldName);
 				continue;
+			}
 
 			String censorlistID = worldConfig.getString("censor-list");
 			if(censorlistID == null)
+			{
+				sendDebugMessage("Censor list null for: " + worldName);
 				continue;
+			}
 
 			List<String> censorList = config.getStringList("chat-moderation.censor-list." + censorlistID);
 			for(String censor : censorList)
@@ -138,5 +147,11 @@ public class ChatListener implements Listener
 				}
 			}
 		}
+	}
+
+	public void sendDebugMessage(String message)
+	{
+		for(Player player : MCUCore.getPlugin().debugList)
+			player.sendRawMessage(message);
 	}
 }

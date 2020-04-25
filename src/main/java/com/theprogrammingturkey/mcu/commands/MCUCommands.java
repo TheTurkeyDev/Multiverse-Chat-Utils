@@ -15,6 +15,7 @@ public class MCUCommands implements CommandExecutor
 	{
 		commands.put("globalsend", new GlobalSendCommand("mvcu.global.send", true));
 		commands.put("globalread", new GlobalReadCommand("mvcu.global.read", true));
+		commands.put("debug", new GlobalReadCommand("mvcu.debug", true));
 	}
 
 

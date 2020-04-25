@@ -18,6 +18,7 @@ public class MCUCore extends JavaPlugin
 
 	public List<Player> globalSendList = new ArrayList<>();
 	public List<Player> globalReadList = new ArrayList<>();
+	public List<Player> debugList = new ArrayList<>();
 
 	@Override
 	public void onEnable()
