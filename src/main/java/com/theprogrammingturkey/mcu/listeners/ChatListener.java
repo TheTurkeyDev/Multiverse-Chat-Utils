@@ -1,6 +1,5 @@
 package com.theprogrammingturkey.mcu.listeners;
 
-import com.onarandombox.MultiverseCore.MultiverseCore;
 import com.theprogrammingturkey.mcu.MCUCore;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -12,7 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -42,25 +40,27 @@ public class ChatListener implements Listener
 				event.setMessage(message.substring(1));
 				addAllWorlds(targetWorlds);
 			}
-
-			int index = message.indexOf(']');
-			if(index == -1)
+			else
 			{
-				player.sendRawMessage("Error missing ']'");
-				event.setCancelled(true);
-				return;
-			}
-			else if(index == 2)
-			{
-				event.setMessage(message.substring(3));
-				addAllWorlds(targetWorlds);
-			}
+				int index = message.indexOf(']');
+				if(index == -1)
+				{
+					player.sendRawMessage("Error missing ']'");
+					event.setCancelled(true);
+					return;
+				}
+				else if(index == 2)
+				{
+					event.setMessage(message.substring(3));
+					addAllWorlds(targetWorlds);
+				}
 
-			String list = message.substring(2, message.indexOf(']'));
-			for(String woldName : list.split(","))
-				targetWorlds.add(Bukkit.getWorld(woldName.trim()));
+				String list = message.substring(2, message.indexOf(']'));
+				for(String woldName : list.split(","))
+					targetWorlds.add(Bukkit.getWorld(woldName.trim()));
 
-			event.setMessage(message.substring(index + 1));
+				event.setMessage(message.substring(index + 1));
+			}
 		}
 		else
 		{
@@ -82,7 +82,7 @@ public class ChatListener implements Listener
 		event.getRecipients().addAll(mcuCore.globalReadList);
 		event.getRecipients().addAll(mcuCore.globalSendList);
 
-		List<String> worldNames = targetWorlds.stream().filter(targetWorld -> !targetWorld.getName().endsWith("_nether") && !targetWorld.getName().endsWith("_the_end")).map(World::getName).collect(Collectors.toList());
+		List<String> worldNames = targetWorlds.stream().filter(targetWorld -> targetWorld != null && !targetWorld.getName().endsWith("_nether") && !targetWorld.getName().endsWith("_the_end")).map(World::getName).collect(Collectors.toList());
 
 		for(String worldName : worldNames)
 		{
