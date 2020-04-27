@@ -107,7 +107,7 @@ public class ChatListener implements Listener
 
 			List<String> censorList = config.getStringList("chat-moderation.censor-list." + censorlistID);
 			censorList = censorList.stream().map(String::toLowerCase).collect(Collectors.toList());
-			String[] words = event.getMessage().toLowerCase().replaceAll("[^a-zA-Z]", "").replace("  ", " ").trim().split(" ");
+			String[] words = event.getMessage().toLowerCase().replaceAll("[^a-zA-Z0-9!@$]", "").replace("  ", " ").trim().split(" ");
 			for(String word : words)
 			{
 				if(censorList.contains(word))
