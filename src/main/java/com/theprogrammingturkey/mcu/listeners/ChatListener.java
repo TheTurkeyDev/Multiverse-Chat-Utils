@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.server.BroadcastMessageEvent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -105,16 +106,24 @@ public class ChatListener implements Listener
 			}
 
 			List<String> censorList = config.getStringList("chat-moderation.censor-list." + censorlistID);
-			for(String censor : censorList)
+			censorList = censorList.stream().map(String::toLowerCase).collect(Collectors.toList());
+			String[] words = event.getMessage().toLowerCase().replaceAll("[^a-zA-Z]", "").replace("  ", " ").trim().split(" ");
+			for(String word : words)
 			{
-				if(event.getMessage().contains(censor))
+				if(censorList.contains(word))
 				{
 					event.setCancelled(true);
-					event.getPlayer().sendRawMessage("Sorry! You cannot say " + censor + " here!");
+					event.getPlayer().sendRawMessage("Sorry! You cannot say " + word + " here!");
 					return;
 				}
 			}
 		}
+	}
+
+	@EventHandler
+	public void onBroadcast(BroadcastMessageEvent event)
+	{
+
 	}
 
 	public void addAllWorlds(List<World> worldList)
